@@ -16,10 +16,10 @@ import {Search} from "lucide-react";
 
 const SubjectsList = () => {
     const [searchQuery, setSearchQuery] = useState('')
-    const [selectedDeparment, setSelectedDeparment] = useState('all');
+    const [selectedDepartment, setSelectedDepartment] = useState('all');
 
-    const departmentFilters = selectedDeparment === 'all' ? [] : [
-        {field: 'department', operator: 'eq' as const, value: selectedDeparment},
+    const departmentFilters = selectedDepartment === 'all' ? [] : [
+        {field: 'department', operator: 'eq' as const, value: selectedDepartment},
     ];
     const searchFilters = searchQuery ? [
         {field: 'name', operator: 'contains' as const, value: searchQuery}
@@ -44,7 +44,7 @@ const SubjectsList = () => {
             },
             {
                 id: 'department',
-                accessorKey: 'department',
+                accessorKey: 'department.name',
                 size: 150,
                 header: () => <p className="column-title">Department</p>,
                 cell: ({getValue}) => <Badge variant ="secondary">{getValue<string>()}</Badge>,
@@ -93,11 +93,11 @@ const SubjectsList = () => {
                     </div>
 
                     <div className="flex gap-2 w-full sm:w-auto">
-                        <Select value={selectedDeparment}
-                                onValueChange={setSelectedDeparment}
+                        <Select value={selectedDepartment}
+                                onValueChange={setSelectedDepartment}
                         >
                             <SelectTrigger>
-                                <SelectValue placeholder="Filter by deparment.."/>
+                                <SelectValue placeholder="Filter by department.."/>
                             </SelectTrigger>
 
                             <SelectContent>
